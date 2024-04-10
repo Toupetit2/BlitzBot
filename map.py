@@ -17,4 +17,5 @@
 #         return True
 #     return False
 
-map = ['-',]
+map = [[0, 0, 1, 0],
+       [0, 0, 0, 0]]
