@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-from player import*
+from player import *
 
 
 LARGEUR, HAUTEUR = 900, 650
@@ -51,6 +51,7 @@ def dessine_mur() :
 
 while True:
     clock.tick(FPS)
+    pygame.display.set_caption(f"Projet NSI - {round(clock.get_fps(), 1)}")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -67,13 +68,20 @@ while True:
         for j in range(15):
             pygame.draw.rect(screen, (i * 5 + 30, j * 5 + 30, 100),(i*65, j*65, 65, 65))
     
+    
+    # Dessin map
+    dessine_mur()
+    dessine_map()
+    
+    
+
     #Afficher joueur
     pygame.draw.circle(screen, (0, 0, 255), (player.x * 65, player.y * 65), 10)
     #Afficher direction
     pygame.draw.line(screen, (255, 255, 0), (player.x * 65, player.y * 65), position_devant_joueur(player, 1))
 
-    dessine_map()
-    dessine_mur()
+    #Afficher les rays
+    player.draw_rays(screen)
     
     #print(round(player.x, 1), round(player.y, 1), player.orientation)
     pygame.display.update()
