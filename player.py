@@ -1,5 +1,6 @@
 import pygame
 import math
+from map import *
 
 class Player:
     def __init__(self):
@@ -42,8 +43,19 @@ class Player:
 
         return (self.x + delta_x)*65, (self.y + delta_y)*65
 
+
+    def ray_get_end(coordonnees, rotation):
+        coordonnees_check = rotation
+        while map.existe_mur((rotation[0], rotation[1])) != True:
+            coordonnees_check = (coordonnees_check[0] + xstep, coordonnees_check[1] + ystep)
+
+
     def draw_rays(self, screen):
         start = self.orientation - self.fov//2
         delta_angle = self.fov / self.nb_rays
         for i in range(self.nb_rays):
-            pygame.draw.line(screen, (255, 255, 0), (self.x * 65, self.y * 65), (self.orientation_line(start + i * delta_angle)))
+            print(start, delta_angle*i)
+            wall_x, wall_y = 0,0
+
+            pygame.draw.line(screen, (255, 255, 0), (self.x * 65, self.y * 65), (wall_x, wall_y))
+        
