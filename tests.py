@@ -30,6 +30,7 @@ while running:
     player_x = 400 + math.cos(math.radians(player_angle)) * 150  # 150 est la distance du joueur à l'origine (400, 300)
     player_y = 300 + math.sin(math.radians(player_angle)) * 150
     pygame.draw.circle(screen, player_color, (int(player_x), int(player_y)), player_radius)
+    print(screen.get_width())
     
     # Mettre à jour l'affichage
     pygame.display.flip()
