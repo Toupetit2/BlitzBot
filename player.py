@@ -8,13 +8,14 @@ class Player:
         self.y = 5
         self.orientation = 0
         self.upOrientation = 180
-        self.speed = 0.2
+        self.speed = 0.4
         self.sensi = 0.5
 
         self.fov = 70
         self.nb_rays = 70
 
     def move(self, keypressed):
+        #pygame.key.get_pressed()
         if keypressed not in [pygame.K_z, pygame.K_q, pygame.K_s, pygame.K_d]:
             return
         
@@ -64,7 +65,7 @@ class Player:
             distance_to_wall.append(sqrt((self.x - ray_end[0])**2 + (self.y - ray_end[1])**2))
         return distance_to_wall
     
-    def ray_casting3D(self, screen):
+    def ray_casting3D(self, screen, minimap):
         height = screen.get_height()
         width = screen.get_width()
 

@@ -6,7 +6,7 @@ from map import *
 
 WIDTH, HEIGHT = 900, 650
 
-minimap_width, minimap_height = 276, 200
+minimap_width, minimap_height = 250, 250
 
 minimap_position = (WIDTH - minimap_width, 0)
 pygame.init()
@@ -53,13 +53,10 @@ while True:
     # Dessin map
     dessine_map(screen)
     
-    
-
-    
     #Afficher les rays
     player.ray_casting(screen)
 
-    player.ray_casting3D(screen)
+    player.ray_casting3D(screen, (minimap_width, minimap_height))
 
     draw_map(screen, player, minimap_position, (minimap_width, minimap_height))
     

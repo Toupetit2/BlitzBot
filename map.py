@@ -22,10 +22,10 @@ def draw_map(screen, player, position_minimap, minimap_size):
     pygame.draw.line(screen, (255, 255, 0), (position_minimap[0], position_minimap[1] + minimap_size[1]), (position_minimap[0] + minimap_size[0], position_minimap[1] + minimap_size[1]), 5)
 
     #Afficher joueur
-    pygame.draw.circle(screen, (255, 0, 0), (position_minimap[0] + (0.5*minimap_size[0]), position_minimap[1] + (0.5*minimap_size[1])), 5)
+    pygame.draw.circle(screen, (255, 0, 0), (position_minimap[0] + (0.5*minimap_size[0]) + (player.x - round(player.x)), position_minimap[1] + (0.5*minimap_size[1]) + (player.y - round(player.y))), 5)
     
     #Afficher Map
-    #TODO : afficher la map proche du joueur
+    #TODO : afficher la map autour du joueur
 
 def dessine_mur(screen, coordonnees):
     pygame.draw.rect(screen,(0,0,0),(65 * coordonnees[0], 65 * coordonnees[1],65,65))
@@ -39,24 +39,23 @@ def dessine_map(screen):
                
 
 def existe_mur(coordonnees):
-     if coordonnees[0] > len(m[0]) - 1 or coordonnees[1] > len(m) - 1:
-          return True
-     if m[floor(coordonnees[0])][floor(coordonnees[1])] == 1:
+    if coordonnees[0] > len(m[0]) - 1 or coordonnees[1] > len(m) - 1:
          return True
-     return False
+    if m[floor(coordonnees[0])][floor(coordonnees[1])] == 1:
+        return True
+    return False
 
 m = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
     [1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1],
     [1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1],
     [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
-print(existe_mur((3.8, 4.5)))
