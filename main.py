@@ -3,10 +3,18 @@ import sys
 
 from player import *
 from map import *
+from ray_casting import *
 
 WIDTH, HEIGHT = 900, 650
 
 minimap_width, minimap_height = 250, 250
+
+colors = {
+    "wall1": (20, 54, 255),
+    "wall2": (10, 34, 235),
+    "ground": (0, 0, 0),
+    "out_of_map": (140, 140, 140)
+}
 
 minimap_position = (WIDTH - minimap_width, 0)
 pygame.init()
@@ -47,18 +55,18 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-            player.move(event.key) #Move player if key pressed
+    player.move() #Move player if key pressed
     
     player.move_cam()
     # Dessin map
     dessine_map(screen)
     
     #Afficher les rays
-    player.ray_casting(screen)
+    #player.ray_casting(screen)
 
-    player.ray_casting3D(screen, (minimap_width, minimap_height))
+    ray_casting3D(screen, (minimap_width, minimap_height), colors, player.orientation, (player.x, player.y))
 
-    draw_map(screen, player, minimap_position, (minimap_width, minimap_height))
+    draw_map(screen, player, minimap_position, (minimap_width, minimap_height), colors)
     
     #print(round(player.x, 1), round(player.y, 1), player.orientation)
     pygame.display.update()
