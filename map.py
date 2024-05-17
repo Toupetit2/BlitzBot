@@ -1,4 +1,5 @@
 from math import *
+from random import*
 import pygame
 # def creer_map(n) :
 #     """crée une map qui servira à définir la map """
@@ -59,3 +60,18 @@ m = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
+
+def generation_map(x,y) : 
+    """Créé un tableau de tableaux représentant une map,
+    dans lequel les 1 représentent des murs et des 0 l'absence de ces derniers"""
+    mp = []
+    for i in range(y) :
+        mp.append([]) 
+        for j in range(x) :
+            mp[i].append(randint(0,1))
+    for k in range(len(mp)) :
+            mp[j-k][0] =1
+            mp[0][k] = 1
+            mp[j][k] = 1
+            mp[k][-1] = 1
+    return mp 
