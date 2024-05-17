@@ -19,7 +19,7 @@ def wall_side(coord):
     """
     renvoie 1 si le mur est vertical, 0 si c'est horizontal
     """
-    if coord[0] - round(coord[0]) < coord[1] - round(coord[1]):
+    if abs(coord[0] - round(coord[0])) < abs(coord[1] - round(coord[1])):
         return 1
     return 0
 
@@ -42,7 +42,7 @@ def ray_casting(orientation, coord):
         
         rays_end.append(rays_end) #Pour l'affichage
         distance_to_wall.append(sqrt((coord[0] - ray_end[0])**2 + (coord[1] - ray_end[1])**2))
-    return distance_to_wall, rays_end
+    return distance_to_wall, rays_end, wall_side_tab
     
 def draw_rays2D(self, rays, screen):
     for i in range(self.nb_rays):
@@ -51,12 +51,13 @@ def draw_rays2D(self, rays, screen):
 
 def ray_casting3D(screen, minimap, colors, orientation, coord):
     """
-    Pour afficher en '3D' la vuedu joueur
+    Pour afficher en '3D' la vue du joueur
     """
     height = screen.get_height()
     width = screen.get_width()
-
-    ray_length = ray_casting(orientation, coord)[0]
+    ray_cast = ray_casting(orientation, coord)
+    ray_color = ray_cast[2]
+    ray_length = ray_cast[0]
     width_rect = width/nb_rays
     screen.fill((0, 0, 0))
 
@@ -66,6 +67,8 @@ def ray_casting3D(screen, minimap, colors, orientation, coord):
         else:
             height_rect = height
         
+        if ray_color[i] == 0:
+            pygame.draw.rect(screen, colors["wall1"], (width_rect*i, (height - height_rect)//2, width_rect+1, height_rect))
+        else:
+            pygame.draw.rect(screen, colors["wall2"], (width_rect*i, (height - height_rect)//2, width_rect+1, height_rect))
 
-        pygame.draw.rect(screen, colors["wall"], (width_rect*i, (height - height_rect)//2, width_rect+1, height_rect))
-    

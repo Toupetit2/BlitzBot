@@ -10,7 +10,8 @@ WIDTH, HEIGHT = 900, 650
 minimap_width, minimap_height = 250, 250
 
 colors = {
-    "wall": (20, 54, 255),
+    "wall1": (20, 54, 255),
+    "wall2": (10, 34, 235),
     "ground": (0, 0, 0),
     "out_of_map": (140, 140, 140)
 }

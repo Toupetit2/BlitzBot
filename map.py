@@ -23,7 +23,7 @@ def draw_map(screen, player, position_minimap, minimap_size, colors):
         for j in range(10):
             if 0 <= round(player.x) - 5 + i < len(m[0])-1 and 0 <= round(player.y) - 5 + j < len(m)-1:
                 if m[round(player.x) - 5 + i][round(player.y) - 5 + j] == 1:
-                    pygame.draw.rect(screen, colors["wall"], pygame.Rect((position_minimap[0] + (i*(minimap_size[0]/10)), position_minimap[1] + (j*(minimap_size[0]/10))), (minimap_size[0]/10, minimap_size[0]/10)))
+                    pygame.draw.rect(screen, colors["wall1"], pygame.Rect((position_minimap[0] + (i*(minimap_size[0]/10)), position_minimap[1] + (j*(minimap_size[0]/10))), (minimap_size[0]/10, minimap_size[0]/10)))
                 else:
                     pygame.draw.rect(screen, colors["ground"], pygame.Rect((position_minimap[0] + (i*(minimap_size[0]/10)), position_minimap[1] + (j*(minimap_size[0]/10))), (minimap_size[0]/10, minimap_size[0]/10)))
             else:
@@ -34,7 +34,12 @@ def draw_map(screen, player, position_minimap, minimap_size, colors):
     pygame.draw.line(screen, (255, 255, 0), (position_minimap[0], position_minimap[1] + minimap_size[1]), (position_minimap[0] + minimap_size[0], position_minimap[1] + minimap_size[1]), 5)
 
     #Afficher joueur
-    pygame.draw.circle(screen, (255, 0, 0), (position_minimap[0] + (0.5*minimap_size[0]) + ((player.x - round(player.x))*minimap_size[0]/10), position_minimap[1] + (0.5*minimap_size[1]) + ((player.y - round(player.y))*minimap_size[0]/10)), 5)
+    pos_joueur = (position_minimap[0] + (0.5*minimap_size[0]) + ((player.x - round(player.x))*minimap_size[0]/10), position_minimap[1] + (0.5*minimap_size[1]) + ((player.y - round(player.y))*minimap_size[0]/10))
+    pygame.draw.circle(screen, (255, 0, 0), pos_joueur, 5)
+
+    #Afficher direction joueur
+    point = (pos_joueur[0] + cos(radians(player.orientation))*10, pos_joueur[1] + sin(radians(player.orientation))*10)
+    pygame.draw.line(screen, (255, 255, 0),pos_joueur, point, 2)
 
 
 def dessine_mur(screen, coordonnees):
