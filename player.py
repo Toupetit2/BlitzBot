@@ -10,7 +10,7 @@ class Player:
         self.orientation = 0
         self.upOrientation = 180
         self.speed = 0.05
-        self.sensi = 0.5
+        self.sensi = 0.01
 
         
 

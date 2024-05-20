@@ -5,11 +5,12 @@ from map import *
 
 fov = 70
 nb_rays = 70
+size_step = 0.005
 
 def ray_get_end(coordonnees, rotation):
     coordonnees_check = coordonnees
-    xstep = math.cos(math.radians(rotation)) * 0.1
-    ystep = math.sin(math.radians(rotation)) * 0.1
+    xstep = math.cos(math.radians(rotation)) * size_step
+    ystep = math.sin(math.radians(rotation)) * size_step
     while existe_mur(coordonnees_check) != True:
         coordonnees_check = (coordonnees_check[0] + xstep, coordonnees_check[1] + ystep)
     return coordonnees_check
