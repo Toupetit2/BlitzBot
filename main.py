@@ -24,18 +24,9 @@ clock = pygame.time.Clock()
 FPS = 60
 pygame.event.set_grab(True)
 pygame.mouse.set_visible(False)
-#2D game
-
-def position_devant_joueur(player, distance):
-    orientation_radians = math.radians(player.orientation)
-    delta_x = math.cos(orientation_radians)
-    delta_y = math.sin(orientation_radians)
-    #print(round(delta_x, 1), round(delta_y, 1), player.orientation)
-    return (player.x + delta_x)*65, (player.y + delta_y)*65
 
 # PLAYER
 player = Player()
-
 
 while True:
     pygame.mouse.set_pos = (WIDTH//2, HEIGHT//2)
@@ -46,22 +37,16 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.KEYDOWN: #Get key press
+        elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-    player.move() #Move player if key pressed
+    player.move()
     
     player.move_cam()
-    # Dessin map
-    dessine_map(screen)
-    
-    #Afficher les rays
-    #player.ray_casting(screen)
 
     ray_casting3D(screen, (minimap_width, minimap_height), colors, player.orientation, (player.x, player.y))
 
     draw_map(screen, player, minimap_position, (minimap_width, minimap_height), colors)
     
-    #print(round(player.x, 1), round(player.y, 1), player.orientation)
     pygame.display.update()

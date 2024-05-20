@@ -2,19 +2,13 @@ from math import *
 from random import*
 import pygame
 
-# def creer_map(n) :
-#     """crée une map qui servira à définir la map """
-#     t = []
-#     for i  in range(n) :
-#         t.append([0]*n)
-#     return t
-
-# def creer_mur(m,i,j) :
-#     """int,int -> None
-#     crée un mur aux coordonnées données"""
-#     m[i][j] = 1
+taille_map = 15
+use_map_generator = True
 
 def draw_map(screen, player, position_minimap, minimap_size, colors):
+    """
+    affiche une minimap en haut de l'écran
+    """
     
     screen_height = screen.get_height()
     screen_width = screen.get_width()
@@ -42,24 +36,34 @@ def draw_map(screen, player, position_minimap, minimap_size, colors):
     point = (pos_joueur[0] + cos(radians(player.orientation))*10, pos_joueur[1] + sin(radians(player.orientation))*10)
     pygame.draw.line(screen, (255, 255, 0),pos_joueur, point, 2)
 
-
-def dessine_mur(screen, coordonnees):
-    pygame.draw.rect(screen,(0,0,0),(65 * coordonnees[0], 65 * coordonnees[1],65,65))
-
-def dessine_map(screen):
-    for i in range(len(m)):
-        for j in range(len(m[0])):
-            if m[i][j] == 1:
-                dessine_mur(screen, (i, j))
-          
-               
-
 def existe_mur(coordonnees):
+    """
+    renvoie True si aux coordonnees en argument il y a un mur, renvoie False sinon
+    """
     if coordonnees[0] > len(m[0]) - 1 or coordonnees[1] > len(m) - 1:
          return True
     if m[floor(coordonnees[0])][floor(coordonnees[1])] == 1:
         return True
     return False
+
+def generation_map(x,y) : 
+    """
+    Créé un tableau de tableaux représentant une map,
+    dans lequel les 1 représentent des murs et des 0 l'absence de ces derniers
+    """
+    mp = []
+    for i in range(y) :
+        mp.append([]) 
+        for j in range(x) :
+            mp[i].append(randint(0,1))
+    for k in range(len(mp)) :
+            mp[j-k][0] =1
+            mp[0][k] = 1
+            mp[j][k] = 1
+            mp[k][-1] = 1
+    
+    mp[5][5] = 0
+    return mp
 
 m = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -76,17 +80,5 @@ m = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-def generation_map(x,y) : 
-    """Créé un tableau de tableaux représentant une map,
-    dans lequel les 1 représentent des murs et des 0 l'absence de ces derniers"""
-    mp = []
-    for i in range(y) :
-        mp.append([]) 
-        for j in range(x) :
-            mp[i].append(randint(0,1))
-    for k in range(len(mp)) :
-            mp[j-k][0] =1
-            mp[0][k] = 1
-            mp[j][k] = 1
-            mp[k][-1] = 1
-    return mp 
+if use_map_generator:
+    m = generation_map(taille_map, taille_map)
