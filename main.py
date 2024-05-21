@@ -45,7 +45,7 @@ while True:
     
     player.move_cam()
 
-    ray_casting3D(screen, (minimap_width, minimap_height), colors, player.orientation, (player.x, player.y))
+    ray_casting3D(screen, colors, player.orientation, (player.x, player.y))
 
     draw_map(screen, player, minimap_position, (minimap_width, minimap_height), colors)
     

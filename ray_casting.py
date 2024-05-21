@@ -5,7 +5,7 @@ from map import *
 
 fov = 70
 nb_rays = 70
-size_step = 0.005
+size_step = 0.01
 
 def ray_get_end(coordonnees, rotation):
     coordonnees_check = coordonnees
@@ -50,7 +50,7 @@ def draw_rays2D(self, rays, screen):
         pygame.draw.line(screen, (255, 255, 0), (self.x * 65, self.y * 65), (rays[1][0] * 65, rays[1][1] * 65))
 
 
-def ray_casting3D(screen, minimap, colors, orientation, coord):
+def ray_casting3D(screen, colors, orientation, coord):
     """
     Pour afficher en '3D' la vue du joueur
     """
